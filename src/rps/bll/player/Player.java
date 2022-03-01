@@ -52,14 +52,15 @@ public class Player implements IPlayer {
         ArrayList<Result> results = (ArrayList<Result>) state.getHistoricResults();
 
 
+
+        Move result = randomMove();
+
+        return result;
+    }
+    private Move randomMove(){
         Random randomMove = new Random();
         int i = randomMove.nextInt(4);
-        playerMove(i);
-
-        return null;
-    }
-    public Move playerMove(int choice){
-        switch (choice){
+        switch (i){
             case 1 -> {
                 return Move.Rock;
             }
