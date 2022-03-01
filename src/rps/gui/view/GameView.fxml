@@ -8,50 +8,82 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="25.0" layoutY="100.0" prefHeight="220.0" prefWidth="550.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Resources/135164-fade%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <HBox alignment="CENTER" layoutX="25.0" layoutY="100.0" prefHeight="220.0" prefWidth="550.0" spacing="10.0">
+         <children>
+            <ImageView fitHeight="110.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
-                  <Insets left="35.0" top="35.0" />
+                  <Insets />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../../Resources/gigachad2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="80.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
-                  <Insets left="75.0" top="35.0" />
+                  <Insets />
                </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../../Resources/r2d2.png" />
+               </image>
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="100.0" prefWidth="550.0" spacing="30.0">
+      <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="25.0" prefHeight="100.0" prefWidth="550.0" spacing="30.0">
          <children>
-            <Label text="Player">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Label text="{Score2}">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
+               <children>
+                  <Label text="Player">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label text="{Score2}">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <Label text="-">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label text="{Score1}">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Label text="AI">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="250.0">
+               <children>
+                  <Label text="{Score1}">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label text="Player">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutX="25.0" layoutY="280.0" prefHeight="106.0" prefWidth="550.0" spacing="20.0">
