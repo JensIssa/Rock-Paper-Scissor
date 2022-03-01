@@ -1,8 +1,15 @@
 package rps;
 
 //Project imports
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import rps.gui.ConsoleApp;
 import rps.gui.JavaFXApp;
+
+import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Main class where we start
@@ -16,20 +23,22 @@ public class Main {
      * Main start
      * @param args
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         //Console version
-        startRPSConsoleGame();
+        //startRPSConsoleGame();
 
         //JavaFX version
-        //startRPSJavaFXGame();
+        startRPSJavaFXGame();
     }
 
     /**
      * Start a JavaFX version of the game
      */
-    private static void startRPSJavaFXGame() {
+    private static void startRPSJavaFXGame() throws IOException {
+
+
         JavaFXApp.launch();
+
     }
 
     /**
