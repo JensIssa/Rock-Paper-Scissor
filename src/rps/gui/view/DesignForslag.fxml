@@ -80,7 +80,7 @@
                      <image>
                         <Image url="@../../../Resources/name_background.jpg" />
                      </image></ImageView>
-                  <Button layoutX="159.0" layoutY="144.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Done" />
+                  <Button layoutX="159.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleDoneClicked" prefHeight="26.0" prefWidth="157.0" text="Done" />
                   <Label layoutX="88.0" layoutY="24.0" text="Choose your name" textFill="#efefef">
                      <font>
                         <Font size="36.0" />
