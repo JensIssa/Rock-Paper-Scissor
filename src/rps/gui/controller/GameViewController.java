@@ -34,7 +34,7 @@ public class GameViewController implements Initializable {
     private Label aiScore;
     @FXML
     private Label aiNameLbl;
-    
+
     @FXML
     private MediaView viewer;
     private  File file;
