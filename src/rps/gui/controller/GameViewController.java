@@ -4,9 +4,12 @@ package rps.gui.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -22,6 +25,9 @@ import java.util.ResourceBundle;
  * @author smsj
  */
 public class GameViewController implements Initializable {
+    public TextField nameInput;
+    public AnchorPane nameAnchorPane;
+    public AnchorPane contentAnchorPane;
     @FXML
     private ImageView playerChoice;
     @FXML
@@ -71,5 +77,19 @@ public class GameViewController implements Initializable {
     }
 
     public void handlePaperClicked(MouseEvent mouseEvent) {
+    }
+
+    public void handleDoneClicked(ActionEvent actionEvent) {
+        String name = nameInput.getText().trim();
+        playerNameLbl.setText(name);
+        if(!name.isEmpty()){
+            contentAnchorPane.getChildren().remove(nameAnchorPane);
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Enter a name");
+            alert.showAndWait();
+        }
+
     }
 }

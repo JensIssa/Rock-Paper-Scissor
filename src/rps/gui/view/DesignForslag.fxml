@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rps.gui.controller.GameViewController">
    <children>
-      <AnchorPane prefHeight="395.0" prefWidth="800.0">
+      <AnchorPane fx:id="contentAnchorPane" prefHeight="395.0" prefWidth="800.0">
          <children>
             <ImageView fitHeight="400.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -42,7 +42,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="90.0" prefWidth="770.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="335.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="335.0" spacing="20.0">
                      <children>
                         <Label fx:id="playerNameLbl" text="Player" textFill="WHITE">
                            <font>
@@ -74,7 +74,7 @@
                      </children></HBox>
                </children>
             </HBox>
-            <AnchorPane layoutX="156.0" layoutY="89.0" prefHeight="200.0" prefWidth="475.0">
+            <AnchorPane fx:id="nameAnchorPane" layoutX="156.0" layoutY="89.0" prefHeight="200.0" prefWidth="475.0">
                <children>
                   <ImageView fitHeight="225.0" fitWidth="475.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -86,7 +86,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="152.0" layoutY="90.0" prefHeight="40.0" prefWidth="170.0" promptText="Enter your name here:" />
+                  <TextField fx:id="nameInput" layoutX="152.0" layoutY="90.0" prefHeight="40.0" prefWidth="170.0" promptText="Enter your name here:" />
                </children>
             </AnchorPane>
          </children>

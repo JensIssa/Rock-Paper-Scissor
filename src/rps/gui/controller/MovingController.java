@@ -51,6 +51,10 @@ public class MovingController implements Initializable {
 
     }
 
+    private void setPlayerScore(){
+
+    }
+
     public void startImage() {
         movingHand.setImage(casting);
     }
