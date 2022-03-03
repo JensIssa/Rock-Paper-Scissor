@@ -19,16 +19,14 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import rps.bll.game.GameManager;
-import rps.bll.game.GameState;
-import rps.bll.game.Move;
-import rps.bll.game.Result;
+import rps.bll.game.*;
 import rps.bll.player.IPlayer;
 import rps.bll.player.Player;
 import rps.bll.player.PlayerType;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -65,12 +63,13 @@ public class GameViewController implements Initializable {
     private GameManager gm;
 
 
-
     public GameViewController() {
         this.human = new Player("human", PlayerType.Human);
         this.bot = new Player("Ai", PlayerType.AI);
         this.gm = new GameManager(human, bot);
+
     }
+
     /**
      * Initializes the controller class.
      */
@@ -78,7 +77,7 @@ public class GameViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         music();
         startImage();
-
+        updateScoreBoard();
     }
 
 
@@ -123,21 +122,23 @@ public class GameViewController implements Initializable {
     }
 
 
-
     public void handleStoneClicked(MouseEvent mouseEvent) {
         moveHand("/Resources/Sten.png", playerChoice);
         gm.playRound(Move.Rock);
+        updateScoreBoard();
     }
 
     public void handleScissorClicked(MouseEvent mouseEvent) {
         moveHand("/Resources/Saks.png", playerChoice);
         gm.playRound(Move.Scissor);
+        updateScoreBoard();
     }
 
 
     public void handlePaperClicked(MouseEvent mouseEvent) {
         moveHand("/Resources/Papir.png", playerChoice);
         gm.playRound(Move.Paper);
+        updateScoreBoard();
     }
 
     public void handleDoneClicked(ActionEvent actionEvent) {
@@ -153,6 +154,24 @@ public class GameViewController implements Initializable {
 
     }
 
+    public void updateScoreBoard() {
+        int scorePlayer = 0;
+        int scoreAI = 0;
+        ArrayList<Result> results = (ArrayList<Result>) gm.getGameState().getHistoricResults();
+
+        for (Result r : results) {
+            PlayerType winner = r.getWinnerPlayer().getPlayerType();
+
+            if (r.getType() != ResultType.Tie) {
+                if (winner == PlayerType.Human) {
+                    scorePlayer++;
+                }
+                else scoreAI++;
+            }
+        }
+        playerScore.setText(String.valueOf(scorePlayer));
+        aiScore.setText(String.valueOf(scoreAI));
+    }
 
 }
 
