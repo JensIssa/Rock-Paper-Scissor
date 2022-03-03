@@ -61,6 +61,7 @@ public class GameViewController implements Initializable {
     private IPlayer bot;
     private IPlayer human;
     private GameManager gm;
+    private boolean gameOn;
 
     private final String ROCK_PATH = "/Resources/Sten.png";
     private final String L_ROCK_PATH = "/Resources/StenL.png";
@@ -70,6 +71,7 @@ public class GameViewController implements Initializable {
     private final String L_SCISSOR_PATH = "/Resources/SaksL.png";
 
     public GameViewController() {
+        gameOn = false;
         this.human = new Player("human", PlayerType.Human);
         this.bot = new Player("Ai", PlayerType.AI);
         this.gm = new GameManager(human, bot);
@@ -96,6 +98,7 @@ public class GameViewController implements Initializable {
     }
 
     public void moveHand(String imagePath, ImageView hand, ImageView playerImageView) {
+        gameOn = true;
         Circle circle = new Circle(12);
         PathTransition transition = new PathTransition();
 
@@ -108,6 +111,8 @@ public class GameViewController implements Initializable {
         transition.play();
         transition.setOnFinished(event -> {
             changeImage(imagePath,playerImageView);
+            updateScoreBoard();
+            gameOn = false;
         });
     }
 
@@ -157,26 +162,29 @@ public class GameViewController implements Initializable {
 
 
     public void handleStoneClicked(MouseEvent mouseEvent) {
-        moveHand(ROCK_PATH, playerChoice,playerChoice);
-        gm.playRound(Move.Rock);
-        handleAIHand();
-        updateScoreBoard();
-
+        if (!gameOn){
+            moveHand(ROCK_PATH, playerChoice,playerChoice);
+            gm.playRound(Move.Rock);
+            handleAIHand();
+        }
     }
 
     public void handleScissorClicked(MouseEvent mouseEvent) {
-        moveHand(SCISSOR_PATH, playerChoice,playerChoice);
-        gm.playRound(Move.Scissor);
-        handleAIHand();
-        updateScoreBoard();
+       if (!gameOn){
+           moveHand(SCISSOR_PATH, playerChoice,playerChoice);
+           gm.playRound(Move.Scissor);
+           handleAIHand();
+       }
+
     }
 
 
     public void handlePaperClicked(MouseEvent mouseEvent) {
-        moveHand(PAPER_PATH, playerChoice,playerChoice);
-        gm.playRound(Move.Paper);
-        handleAIHand();
-        updateScoreBoard();
+        if (!gameOn){
+            moveHand(PAPER_PATH, playerChoice,playerChoice);
+            gm.playRound(Move.Paper);
+            handleAIHand();
+        }
     }
 
     public void handleDoneClicked(ActionEvent actionEvent) {
