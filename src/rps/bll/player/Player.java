@@ -28,7 +28,7 @@ public class Player implements IPlayer {
     float rockPercent = 0;
     float paperPercent = 0;
     float scissorPercent = 0;
-    float counterMovePercent = 0;
+
 
     /**
      * @param name
@@ -81,10 +81,11 @@ public class Player implements IPlayer {
         }
 
         Move move = randomMove();
+
         Move counterMove = counterFavoriteMove(paperPick, scissorPick, rockPick);
 
         Random random = new Random();
-        if (counterMove != null && random.nextInt(100) <40) {
+        if (counterMove != null && random.nextInt(100) < 40) {
             move = counterMove;
         }
 
