@@ -59,7 +59,7 @@
                      <image>
                         <Image url="@../../../Resources/vsgif.gif" />
                      </image></ImageView>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="335.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="335.0" spacing="20.0">
                      <children>
                         <Label fx:id="aiScore" text="Score{2}" textFill="WHITE">
                            <font>
