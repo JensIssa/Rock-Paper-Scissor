@@ -69,11 +69,11 @@ public class GameViewController implements Initializable {
     private final String SCISSOR_PATH = "/Resources/Saks.png";
     private final String L_SCISSOR_PATH = "/Resources/SaksL.png";
 
-
     public GameViewController() {
         this.human = new Player("human", PlayerType.Human);
         this.bot = new Player("Ai", PlayerType.AI);
         this.gm = new GameManager(human, bot);
+
     }
 
     /**
@@ -83,7 +83,7 @@ public class GameViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         music();
         startImage();
-
+        updateScoreBoard();
     }
 
 
@@ -160,12 +160,15 @@ public class GameViewController implements Initializable {
         moveHand(ROCK_PATH, playerChoice,playerChoice);
         gm.playRound(Move.Rock);
         handleAIHand();
+        updateScoreBoard();
+
     }
 
     public void handleScissorClicked(MouseEvent mouseEvent) {
         moveHand(SCISSOR_PATH, playerChoice,playerChoice);
         gm.playRound(Move.Scissor);
         handleAIHand();
+        updateScoreBoard();
     }
 
 
@@ -173,6 +176,7 @@ public class GameViewController implements Initializable {
         moveHand(PAPER_PATH, playerChoice,playerChoice);
         gm.playRound(Move.Paper);
         handleAIHand();
+        updateScoreBoard();
     }
 
     public void handleDoneClicked(ActionEvent actionEvent) {
@@ -188,6 +192,24 @@ public class GameViewController implements Initializable {
 
     }
 
+    public void updateScoreBoard() {
+        int scorePlayer = 0;
+        int scoreAI = 0;
+        ArrayList<Result> results = (ArrayList<Result>) gm.getGameState().getHistoricResults();
+
+        for (Result r : results) {
+            PlayerType winner = r.getWinnerPlayer().getPlayerType();
+
+            if (r.getType() != ResultType.Tie) {
+                if (winner == PlayerType.Human) {
+                    scorePlayer++;
+                }
+                else scoreAI++;
+            }
+        }
+        playerScore.setText(String.valueOf(scorePlayer));
+        aiScore.setText(String.valueOf(scoreAI));
+    }
 
 }
 
