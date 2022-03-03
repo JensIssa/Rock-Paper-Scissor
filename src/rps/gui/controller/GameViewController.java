@@ -19,16 +19,14 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import rps.bll.game.GameManager;
-import rps.bll.game.GameState;
-import rps.bll.game.Move;
-import rps.bll.game.Result;
+import rps.bll.game.*;
 import rps.bll.player.IPlayer;
 import rps.bll.player.Player;
 import rps.bll.player.PlayerType;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -64,6 +62,12 @@ public class GameViewController implements Initializable {
     private IPlayer human;
     private GameManager gm;
 
+    private final String ROCK_PATH = "/Resources/Sten.png";
+    private final String L_ROCK_PATH = "/Resources/StenL.png";
+    private final String PAPER_PATH = "/Resources/Papir.png";
+    private final String L_PAPER_PATH = "/Resources/PapirL.png";
+    private final String SCISSOR_PATH = "/Resources/Saks.png";
+    private final String L_SCISSOR_PATH = "/Resources/SaksL.png";
 
 
     public GameViewController() {
@@ -71,6 +75,7 @@ public class GameViewController implements Initializable {
         this.bot = new Player("Ai", PlayerType.AI);
         this.gm = new GameManager(human, bot);
     }
+
     /**
      * Initializes the controller class.
      */
@@ -88,56 +93,86 @@ public class GameViewController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         System.out.println(mediaPlayer);
         System.out.println(mediaPlayer.isMute());
-
     }
 
-    public void moveHand(String imagePath, ImageView hand) {
+    public void moveHand(String imagePath, ImageView hand, ImageView playerImageView) {
         Circle circle = new Circle(12);
-
         PathTransition transition = new PathTransition();
+
+        startImage();
+
         transition.setNode(hand);
         transition.setDuration(Duration.seconds(0.3));
         transition.setPath(circle);
         transition.setCycleCount(3);
         transition.play();
         transition.setOnFinished(event -> {
-            changeImage(imagePath);
+            changeImage(imagePath,playerImageView);
         });
     }
 
     public void startImage() {
-        Image image = new Image("/Resources/Sten.png");
-        Image imageL = new Image("/Resources/StenL.png");
+        Image image = new Image(ROCK_PATH);
+        Image imageL = new Image(L_ROCK_PATH);
         playerChoice.setImage(image); // default img
         aiChoice.setImage(imageL);
     }
 
     private void handleAIHand() {
+        ArrayList<Result> results = (ArrayList<Result>) gm.getGameState().getHistoricResults();
+        Result latestResult = results.get(results.size() - 1);
 
+        Move aiMove = null;
+        //ai win
+        if (latestResult.getWinnerPlayer().getPlayerType() == PlayerType.AI) {
+            aiMove = latestResult.getWinnerMove();
+        }
+
+        //player win
+        if (latestResult.getWinnerPlayer().getPlayerType() == PlayerType.Human) {
+            aiMove = latestResult.getLoserMove();
+        }
+
+        //tie
+        if (latestResult.getType() == ResultType.Tie) {
+            aiMove = latestResult.getLoserMove(); //test
+        }
+
+        System.out.println(aiMove);
+        String imagePath = "";
+        switch (aiMove){
+            case Paper ->imagePath = L_PAPER_PATH;
+            case Rock ->imagePath = L_ROCK_PATH;
+            case Scissor ->imagePath = L_SCISSOR_PATH;
+        }
+
+        moveHand(imagePath,aiChoice,aiChoice);
     }
 
-    public void changeImage(String imagePath) {
+    public void changeImage(String imagePath, ImageView playerImageView) {
         Image chosen = new Image(imagePath);
-        playerChoice.setImage(chosen);
+        playerImageView.setImage(chosen);
 
     }
-
 
 
     public void handleStoneClicked(MouseEvent mouseEvent) {
-        moveHand("/Resources/Sten.png", playerChoice);
+        moveHand(ROCK_PATH, playerChoice,playerChoice);
         gm.playRound(Move.Rock);
+        handleAIHand();
     }
 
     public void handleScissorClicked(MouseEvent mouseEvent) {
-        moveHand("/Resources/Saks.png", playerChoice);
+        moveHand(SCISSOR_PATH, playerChoice,playerChoice);
         gm.playRound(Move.Scissor);
+        handleAIHand();
     }
 
 
     public void handlePaperClicked(MouseEvent mouseEvent) {
-        moveHand("/Resources/Papir.png", playerChoice);
+        moveHand(PAPER_PATH, playerChoice,playerChoice);
         gm.playRound(Move.Paper);
+        handleAIHand();
     }
 
     public void handleDoneClicked(ActionEvent actionEvent) {
